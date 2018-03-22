@@ -25,6 +25,10 @@ The API and data models are specified in [swagger.yaml](/api/swagger.yaml) / [sw
 
 The CIF Cloud services architecture is based on [OpenWhisk](https://openwhisk.apache.org) & [Adobe I/O Runtime](https://www.adobe.io/apis/cloudplatform/runtime.html). The main building blocks of the new commerce services are serverless functions (OpenWhisk actions). These actions run on Adobe I/O Runtime inside an isolated container, stateless and serverless interacting with the commerce backend system or other endpoints via their APIs. 
 
+## Get started
+
+To get started, you can follow the [tutorial](tutorial) that guides you into developing one particular API endpoint.
+
 ## Contributing
 
 Contributions are welcome! Read the [Contributing Guide](CONTRIBUTING.md) for more information.
