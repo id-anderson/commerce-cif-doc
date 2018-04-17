@@ -2,7 +2,7 @@
   "swagger" : "2.0",
   "info" : {
     "description" : "Adobe Commerce Cloud API",
-    "version" : "0.1.94",
+    "version" : "0.1.100",
     "title" : "Commerce Cloud Integration Framework API",
     "license" : {
       "name" : "Copyright 2018 Adobe Systems Incorporated. All Rights Reserved."
@@ -888,6 +888,26 @@
           },
           "collectionFormat" : "pipes"
         }, {
+          "name" : "selectedFacets",
+          "in" : "query",
+          "description" : "The facets values used for filtering, separated by the pipe character (OpenWhisk does not yet support the 'multi' collection format).",
+          "required" : false,
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          },
+          "collectionFormat" : "pipes"
+        }, {
+          "name" : "queryFacets",
+          "in" : "query",
+          "description" : "The facets list to be calculated, separated by the pipe character (OpenWhisk does not yet support the 'multi' collection format).",
+          "required" : false,
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          },
+          "collectionFormat" : "pipes"
+        }, {
           "name" : "sort",
           "in" : "query",
           "description" : "The sort attributes and direction, separated by the pipe character (OpenWhisk does not yet support the 'multi' collection format).",
@@ -1063,6 +1083,31 @@
         "url" : {
           "type" : "string",
           "description" : "The url of the asset."
+        }
+      }
+    },
+    "Attribute" : {
+      "type" : "object",
+      "required" : [ "id", "name", "value" ],
+      "properties" : {
+        "id" : {
+          "type" : "string",
+          "description" : "The unique id for this text attribute, for example 'width'."
+        },
+        "name" : {
+          "type" : "object",
+          "description" : "The localized name for this text attribute, for example 'Width' or 'Breite'.",
+          "additionalProperties" : {
+            "type" : "string"
+          }
+        },
+        "value" : {
+          "type" : "object",
+          "description" : "The value of the attribute. This can be any arbitrary valid JSON value."
+        },
+        "variantAttribute" : {
+          "type" : "boolean",
+          "description" : "If true, this attribute is a variant attribute. If not set or false, the attribute is a normal/simple attribute."
         }
       }
     },
@@ -1303,6 +1348,66 @@
         }
       }
     },
+    "Facet" : {
+      "type" : "object",
+      "required" : [ "name" ],
+      "properties" : {
+        "name" : {
+          "type" : "string",
+          "description" : "The name of the facet."
+        },
+        "label" : {
+          "type" : "object",
+          "description" : "The label of the facet.",
+          "additionalProperties" : {
+            "type" : "string"
+          }
+        },
+        "missed" : {
+          "type" : "integer",
+          "format" : "int32",
+          "description" : "The number of missed items."
+        },
+        "multiSelect" : {
+          "type" : "boolean",
+          "description" : "Indicates if the facet is multi selectable."
+        },
+        "type" : {
+          "type" : "string",
+          "description" : "The type of the facet."
+        },
+        "facetValues" : {
+          "type" : "array",
+          "description" : "List of facetValues calculated for this facet.",
+          "items" : {
+            "$ref" : "#/definitions/FacetValue"
+          }
+        }
+      }
+    },
+    "FacetValue" : {
+      "type" : "object",
+      "required" : [ "id", "occurrences", "value" ],
+      "properties" : {
+        "id" : {
+          "type" : "string",
+          "description" : "The id for this facet."
+        },
+        "value" : {
+          "type" : "object",
+          "description" : "The value for this facet."
+        },
+        "occurrences" : {
+          "type" : "integer",
+          "format" : "int32",
+          "description" : "The number of facet value occurrences."
+        },
+        "selected" : {
+          "type" : "boolean",
+          "description" : "Indicates if the current facet value was selected."
+        }
+      }
+    },
     "LoginResult" : {
       "type" : "object",
       "properties" : {
@@ -1348,6 +1453,13 @@
           "description" : "The results for this response.",
           "items" : {
             "type" : "object"
+          }
+        },
+        "facets" : {
+          "type" : "array",
+          "description" : "The list of facets for this response.",
+          "items" : {
+            "$ref" : "#/definitions/Facet"
           }
         }
       }
@@ -1466,11 +1578,11 @@
             "$ref" : "#/definitions/Asset"
           }
         },
-        "simpleAttributes" : {
+        "attributes" : {
           "type" : "array",
-          "description" : "The simple attributes for this product.",
+          "description" : "The attributes for this product.",
           "items" : {
-            "$ref" : "#/definitions/SimpleAttribute"
+            "$ref" : "#/definitions/Attribute"
           }
         },
         "createdDate" : {
@@ -1492,13 +1604,6 @@
           "description" : "The variants for this product.",
           "items" : {
             "$ref" : "#/definitions/ProductVariant"
-          }
-        },
-        "variantAxes" : {
-          "type" : "array",
-          "description" : "The variant axis definitions defined in all the variants of this product.",
-          "items" : {
-            "$ref" : "#/definitions/VariantAxis"
           }
         }
       }
@@ -1546,11 +1651,11 @@
             "$ref" : "#/definitions/Asset"
           }
         },
-        "simpleAttributes" : {
+        "attributes" : {
           "type" : "array",
-          "description" : "The simple attributes for this product.",
+          "description" : "The attributes for this product.",
           "items" : {
-            "$ref" : "#/definitions/SimpleAttribute"
+            "$ref" : "#/definitions/Attribute"
           }
         },
         "createdDate" : {
@@ -1566,13 +1671,6 @@
         "sku" : {
           "type" : "string",
           "description" : "The unique SKU of the product assigned by the vendor or manufacturer."
-        },
-        "variantAttributes" : {
-          "type" : "array",
-          "description" : "The variant attributes of this variant product.",
-          "items" : {
-            "$ref" : "#/definitions/VariantAttribute"
-          }
         }
       }
     },
@@ -1624,27 +1722,6 @@
         }
       }
     },
-    "SimpleAttribute" : {
-      "type" : "object",
-      "required" : [ "id", "name", "value" ],
-      "properties" : {
-        "id" : {
-          "type" : "string",
-          "description" : "The unique id for this text attribute, for example 'width'."
-        },
-        "name" : {
-          "type" : "object",
-          "description" : "The localized name for this text attribute, for example 'Width' or 'Breite'.",
-          "additionalProperties" : {
-            "type" : "string"
-          }
-        },
-        "value" : {
-          "type" : "object",
-          "description" : "The value of the attribute. This can be any arbitrary valid JSON value."
-        }
-      }
-    },
     "TaxInfo" : {
       "type" : "object",
       "required" : [ "totalCentAmount" ],
@@ -1675,62 +1752,6 @@
         "centAmount" : {
           "type" : "number",
           "description" : "The amount in cents for the tax portion."
-        }
-      }
-    },
-    "VariantAttribute" : {
-      "type" : "object",
-      "required" : [ "id", "value" ],
-      "properties" : {
-        "id" : {
-          "type" : "string",
-          "description" : "The unique id for this variant attribute, for example 'size' or 'color'."
-        },
-        "value" : {
-          "type" : "string",
-          "description" : "The value for this variant property, for example 'xl' or 'blue'."
-        }
-      },
-      "description" : "A VariantAttribute object always refers to a VariantAxis object in the parent Product object of the VariantProduct."
-    },
-    "VariantAttributeValue" : {
-      "type" : "object",
-      "required" : [ "name", "value" ],
-      "properties" : {
-        "value" : {
-          "type" : "string",
-          "description" : "The language-agnostic value for this variant attribute, for example 'blue'."
-        },
-        "name" : {
-          "type" : "object",
-          "description" : "The localized name for this variant value, for example 'Blue' or 'Blaue'.",
-          "additionalProperties" : {
-            "type" : "string"
-          }
-        }
-      }
-    },
-    "VariantAxis" : {
-      "type" : "object",
-      "required" : [ "id" ],
-      "properties" : {
-        "id" : {
-          "type" : "string",
-          "description" : "The unique identifier for this variant axis, for example 'size' or 'color'."
-        },
-        "name" : {
-          "type" : "object",
-          "description" : "The localized name for this variant axis, for example 'Color' or 'Farbe'.",
-          "additionalProperties" : {
-            "type" : "string"
-          }
-        },
-        "values" : {
-          "type" : "array",
-          "description" : "The possible attribute values for this variant axis.",
-          "items" : {
-            "$ref" : "#/definitions/VariantAttributeValue"
-          }
         }
       }
     }
