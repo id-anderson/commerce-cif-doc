@@ -1,0 +1,67 @@
+{
+    "id": "cart-1",
+    "customerId": "customer-1",
+    "currency": "USD",
+    "taxIncludedInPrices": true,
+    "totalPrice": {
+        "country": "US",
+        "currency": "USD",
+        "centAmount": 10000
+    },
+    "totalProductPrice": {
+        "country": "US",
+        "currency": "USD",
+        "centAmount": 9000
+    },
+    "cartEntries": [
+        {
+            "id": "entry-1",
+            "quantity": 2,
+            "productVariant": {
+                "id": "product-1-1"
+            },
+            "unitPrice": {
+                "country": "US",
+                "currency": "USD",
+                "centAmount": 4500
+            },
+            "cartEntryPrice": {
+                "country": "US",
+                "currency": "USD",
+                "centAmount": 9000
+            },
+            "discounts": [],
+            "discountedCartEntryPrice": {},
+            "cartEntryTaxInfo": {
+                "totalCentAmount": 900,
+                "taxPortions": [
+                    {
+                        "name": {
+                            "en": "VAT 10%"
+                        },
+                        "centAmount": 900
+                    }
+                ]
+            },
+            "type": "REGULAR"
+        }
+    ],
+    "cartTaxInfo": {
+        "totalCentAmount": 900,
+        "taxPortions": [
+            {
+                "name": {
+                    "en": "VAT 10%"
+                },
+                "centAmount": 900
+            }
+        ]
+    },
+    "billingAddress": {},
+    "shippingAddress": {},
+    "shippingInfo": {},
+    "discounts": [],
+    "payment": {},
+    "createdDate": "2017-01-11T14:58:29.432Z",
+    "lastModifiedDate": "2017-07-06T18:09:42.687Z"
+}

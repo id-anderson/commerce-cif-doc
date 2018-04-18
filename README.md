@@ -21,6 +21,10 @@ The CIF Cloud API is not a full CRUD commerce admin or management API, for examp
 
 The API and data models are specified in [swagger.yaml](/api/swagger.yaml) / [swagger.json](/api/swagger.json). Review directly in [Swagger UI](http://petstore.swagger.io/?url=https://raw.githubusercontent.com/Adobe-Marketing-Cloud/commerce-cif-doc/master/api/swagger.yaml) or [Swagger Editor](http://editor.swagger.io/).
 
+### JSON model examples
+
+The [examples](examples) folder contains some JSON model examples that can help during the development of the CIF Cloud API. Check the README in that folder for more information about the examples.
+
 ## Adobe I/O Runtime
 
 The CIF Cloud services architecture is based on [OpenWhisk](https://openwhisk.apache.org) & [Adobe I/O Runtime](https://www.adobe.io/apis/cloudplatform/runtime.html). The main building blocks of the new commerce services are serverless functions (OpenWhisk actions). These actions run on Adobe I/O Runtime inside an isolated container, stateless and serverless interacting with the commerce backend system or other endpoints via their APIs. 

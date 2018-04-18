@@ -2,7 +2,7 @@
   "swagger" : "2.0",
   "info" : {
     "description" : "Adobe Commerce Cloud API",
-    "version" : "0.1.100",
+    "version" : "0.1.102",
     "title" : "Commerce Cloud Integration Framework API",
     "license" : {
       "name" : "Copyright 2018 Adobe Systems Incorporated. All Rights Reserved."
@@ -684,7 +684,7 @@
         }, {
           "name" : "offset",
           "in" : "query",
-          "description" : "Defines the number of products to skip when returning the result.",
+          "description" : "Defines the number of categories to skip when returning the result.",
           "required" : false,
           "type" : "integer",
           "minimum" : 0,
@@ -692,7 +692,7 @@
         }, {
           "name" : "limit",
           "in" : "query",
-          "description" : "Defines the maximum number of products to be returned by that search.",
+          "description" : "Defines the maximum number of categories to be returned by that query.",
           "required" : false,
           "type" : "integer",
           "minimum" : 0,

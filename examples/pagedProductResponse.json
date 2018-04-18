@@ -1,0 +1,14 @@
+{
+    "offset": 0,
+    "count": 2,
+    "total": 2,
+    "results": [
+        {
+            "id": "product-1"
+        },
+        {
+            "id": "product-2"
+        }
+    ],
+    "facets": []
+}
