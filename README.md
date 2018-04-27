@@ -33,6 +33,12 @@ The CIF Cloud services architecture is based on [OpenWhisk](https://openwhisk.ap
 
 To get started, you can follow the [tutorial](tutorial) that guides you into developing one particular API endpoint.
 
+## Documentation
+
+### Product Search
+
+The product search service supports a flexible approach to query & filter product data by full-text search or attributes. This [document](doc/product_search.md) has a vararity of examples.
+
 ## Contributing
 
 Contributions are welcome! Read the [Contributing Guide](CONTRIBUTING.md) for more information.
