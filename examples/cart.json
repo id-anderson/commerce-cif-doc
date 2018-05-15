@@ -2,8 +2,13 @@
     "id": "cart-1",
     "customerId": "customer-1",
     "currency": "USD",
-    "taxIncludedInPrices": true,
-    "totalPrice": {
+    "taxIncludedInPrices": false,
+    "grossTotalPrice": {
+        "country": "US",
+        "currency": "USD",
+        "centAmount": 11000
+    },
+    "netTotalPrice": {
         "country": "US",
         "currency": "USD",
         "centAmount": 10000
@@ -11,7 +16,7 @@
     "totalProductPrice": {
         "country": "US",
         "currency": "USD",
-        "centAmount": 9000
+        "centAmount": 11000
     },
     "cartEntries": [
         {
@@ -23,23 +28,41 @@
             "unitPrice": {
                 "country": "US",
                 "currency": "USD",
-                "centAmount": 4500
+                "centAmount": 5500
             },
             "cartEntryPrice": {
                 "country": "US",
                 "currency": "USD",
-                "centAmount": 9000
+                "centAmount": 11000
             },
-            "discounts": [],
-            "discountedCartEntryPrice": {},
+            "discounts": [
+                {
+                    "id": "discount-id",
+                    "type": "cart-entry-discount",
+                    "name": {
+                        "en": "$10 discount for orders over $100"
+                    },
+                    "message": {
+                        "en": "Get $10 discount for orders over $100."
+                    },
+                    "discountedAmount": {
+                        "currency": "USD",
+                        "centAmount": 1000
+                    }
+                }
+            ],
+            "discountedCartEntryPrice": {
+                "currency": "USD",
+                "centAmount": 10000
+            },
             "cartEntryTaxInfo": {
-                "totalCentAmount": 900,
+                "totalCentAmount": 1000,
                 "taxPortions": [
                     {
                         "name": {
                             "en": "VAT 10%"
                         },
-                        "centAmount": 900
+                        "centAmount": 1000
                     }
                 ]
             },
@@ -47,13 +70,13 @@
         }
     ],
     "cartTaxInfo": {
-        "totalCentAmount": 900,
+        "totalCentAmount": 1000,
         "taxPortions": [
             {
                 "name": {
                     "en": "VAT 10%"
                 },
-                "centAmount": 900
+                "centAmount": 1000
             }
         ]
     },
@@ -62,6 +85,15 @@
     "shippingInfo": {},
     "discounts": [],
     "payment": {},
+    "coupons": [
+        {
+            "id": "coupon-id",
+            "code": "COUPON123",
+            "description": {
+                "en": "This is a coupon."
+            }
+        }
+    ],
     "createdDate": "2017-01-11T14:58:29.432Z",
     "lastModifiedDate": "2017-07-06T18:09:42.687Z"
 }

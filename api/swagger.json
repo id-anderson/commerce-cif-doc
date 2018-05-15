@@ -2,7 +2,7 @@
   "swagger" : "2.0",
   "info" : {
     "description" : "Adobe Commerce Cloud API",
-    "version" : "0.1.102",
+    "version" : "0.1.110",
     "title" : "Commerce Cloud Integration Framework API",
     "license" : {
       "name" : "Copyright 2018 Adobe Systems Incorporated. All Rights Reserved."
@@ -229,6 +229,97 @@
           },
           "404" : {
             "description" : "Cart not found."
+          }
+        }
+      }
+    },
+    "/carts/{id}/coupons" : {
+      "post" : {
+        "tags" : [ "carts" ],
+        "summary" : "Adds a coupon to the shopping cart.",
+        "description" : "",
+        "operationId" : "postCoupons",
+        "consumes" : [ "application/x-www-form-urlencoded" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "The id of the cart to which the coupon will be added.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "code",
+          "in" : "formData",
+          "description" : "The coupon code.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "customerId",
+          "in" : "formData",
+          "description" : "If the cart belongs to a customer, this must be set to the customer id owning that cart.",
+          "required" : false,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/Cart"
+            }
+          },
+          "400" : {
+            "description" : "Bad Request."
+          },
+          "403" : {
+            "description" : "Forbidden."
+          },
+          "404" : {
+            "description" : "Not Found."
+          }
+        }
+      }
+    },
+    "/carts/{id}/coupons/{couponId}" : {
+      "delete" : {
+        "tags" : [ "carts" ],
+        "summary" : "Deletes a coupon from the shopping cart.",
+        "description" : "",
+        "operationId" : "deleteCoupons",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "The id of the cart for which the coupon will be deleted.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "couponId",
+          "in" : "path",
+          "description" : "The id of the coupon that will be deleted.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "customerId",
+          "in" : "query",
+          "description" : "If the cart belongs to a customer, this must be set to the customer id owning that cart.",
+          "required" : false,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/Cart"
+            }
+          },
+          "400" : {
+            "description" : "Bad Request."
+          },
+          "403" : {
+            "description" : "Forbidden."
+          },
+          "404" : {
+            "description" : "Not Found."
           }
         }
       }
@@ -718,7 +809,7 @@
           "200" : {
             "description" : "successful operation",
             "schema" : {
-              "$ref" : "#/definitions/PagedResponse"
+              "$ref" : "#/definitions/PagedResponseCategory"
             }
           }
         }
@@ -938,7 +1029,7 @@
           "200" : {
             "description" : "successful operation",
             "schema" : {
-              "$ref" : "#/definitions/PagedResponse"
+              "$ref" : "#/definitions/PagedResponseProduct"
             }
           },
           "400" : {
@@ -1130,12 +1221,16 @@
           "type" : "string",
           "description" : "If set, this defines the customer owning this cart. If not set, the cart is an anonymous cart."
         },
-        "totalPrice" : {
-          "description" : "The total for the cart, including taxes, discounts, and shipping. ",
+        "netTotalPrice" : {
+          "description" : "The net total price for the cart, including discounts, and shipping, but excluding any taxes.",
+          "$ref" : "#/definitions/Price"
+        },
+        "grossTotalPrice" : {
+          "description" : "The gross total price for the cart, including discounts, shipping, and all taxes.",
           "$ref" : "#/definitions/Price"
         },
         "totalProductPrice" : {
-          "description" : "The product subtotal for the cart, including discounts and with or without taxes depending if the product prices include taxes or not.",
+          "description" : "The product subtotal for the cart, including discounts and with or without taxes depending if the product prices include taxes or not.Until a shipping address is set, this field is typically used as the temporary cart total until it is known if prices include taxes or not.",
           "$ref" : "#/definitions/Price"
         },
         "cartTaxInfo" : {
@@ -1182,6 +1277,13 @@
         "currency" : {
           "type" : "string",
           "description" : "The currency for the cart."
+        },
+        "coupons" : {
+          "type" : "array",
+          "description" : "A list of all coupons of the cart.",
+          "items" : {
+            "$ref" : "#/definitions/Coupon"
+          }
         }
       }
     },
@@ -1281,6 +1383,27 @@
           "type" : "string",
           "format" : "date-time",
           "description" : "The date when this product was last modified."
+        }
+      }
+    },
+    "Coupon" : {
+      "type" : "object",
+      "required" : [ "code", "id" ],
+      "properties" : {
+        "id" : {
+          "type" : "string",
+          "description" : "The id of the coupon instance applied to a cart. If not supported by commerce engine, should be equal to code."
+        },
+        "code" : {
+          "type" : "string",
+          "description" : "The code to activate the coupon."
+        },
+        "description" : {
+          "type" : "object",
+          "description" : "The description of the coupon.",
+          "additionalProperties" : {
+            "type" : "string"
+          }
         }
       }
     },
@@ -1453,6 +1576,74 @@
           "description" : "The results for this response.",
           "items" : {
             "type" : "object"
+          }
+        },
+        "facets" : {
+          "type" : "array",
+          "description" : "The list of facets for this response.",
+          "items" : {
+            "$ref" : "#/definitions/Facet"
+          }
+        }
+      }
+    },
+    "PagedResponseCategory" : {
+      "type" : "object",
+      "properties" : {
+        "offset" : {
+          "type" : "integer",
+          "format" : "int32",
+          "description" : "The offset for this response, this is the number of elements skipped, not a page number."
+        },
+        "count" : {
+          "type" : "integer",
+          "format" : "int32",
+          "description" : "The actual number of results returned in results."
+        },
+        "total" : {
+          "type" : "integer",
+          "format" : "int32",
+          "description" : "The total number of results matching the query."
+        },
+        "results" : {
+          "type" : "array",
+          "description" : "The results for this response.",
+          "items" : {
+            "$ref" : "#/definitions/Category"
+          }
+        },
+        "facets" : {
+          "type" : "array",
+          "description" : "The list of facets for this response.",
+          "items" : {
+            "$ref" : "#/definitions/Facet"
+          }
+        }
+      }
+    },
+    "PagedResponseProduct" : {
+      "type" : "object",
+      "properties" : {
+        "offset" : {
+          "type" : "integer",
+          "format" : "int32",
+          "description" : "The offset for this response, this is the number of elements skipped, not a page number."
+        },
+        "count" : {
+          "type" : "integer",
+          "format" : "int32",
+          "description" : "The actual number of results returned in results."
+        },
+        "total" : {
+          "type" : "integer",
+          "format" : "int32",
+          "description" : "The total number of results matching the query."
+        },
+        "results" : {
+          "type" : "array",
+          "description" : "The results for this response.",
+          "items" : {
+            "$ref" : "#/definitions/Product"
           }
         },
         "facets" : {
