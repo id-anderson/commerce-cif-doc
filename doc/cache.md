@@ -8,7 +8,8 @@ AEM Connector implements different purposes caches:
 
 Used when authoring pages, the cache for the catalog data is a long lived cache as usually this type of data rarely changes.
     
-However the cached catalog is periodically refreshed. The refresh interval can be configured in Adobe Experience Manager Web Console:
+However the cached catalog is automatically updated with latest catalog data at a refresh interval. 
+The parameter can be configured in Adobe Experience Manager Web Console:
 * **Catalog caching time in minutes** - The caching time (in minutes) of the catalog categories
 structure in the resource resolver mapper
 
