@@ -1,10 +1,10 @@
-#Caches in AEM Connector 
+# Caches in AEM Connector 
 AEM Connector implements different purposes caches:
 * Catalog Cache 
 * HTTP cache 
 * Cart Cache
 
-##Catalog cache
+## Catalog cache
 
 Used when authoring pages, the cache for the catalog data is a long lived cache as usually this type of data rarely changes.
     
@@ -12,7 +12,7 @@ However the cached catalog is periodically refreshed. The refresh interval can b
 * **Catalog caching time in minutes** - The caching time (in minutes) of the catalog categories
 structure in the resource resolver mapper
 
-##HTTP Cache
+## HTTP Cache
  
 AEM Connector implements a full HTTP Client that can cache CIF responses based on `Cache-Control` header. 
 The following parameters can be configured in Adobe Experience Manager Web Console for the HTTP Cache:
@@ -27,7 +27,7 @@ For more details on how to return http header from open whisk actions refer to [
 
 Note that an open whisk action has to be deployed as a `webaction` to be able to return valid HTTP responses.   
 
-##Cart Cache
+## Cart Cache
 Cart Cache is a short lived cached. It was designed to avoid unnecessary `/GET` Cart API requests after updating the cart. 
 The cart entry time to live period can be configured in Adobe Experience Manager Web Console:
   * **CCIF Cart Cache Entry time to live** - CIF Cart Cache Entry time to live in milliseconds
