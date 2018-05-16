@@ -27,10 +27,7 @@ For more details on how to return http header from open whisk actions refer to [
 
 Note that an open whisk action has to be deployed as a `webaction` to be able to return valid HTTP responses.   
 
-
 ##Cart Cache
 Cart Cache is a short lived cached. It was designed to avoid unnecessary `/GET` Cart API requests after updating the cart. 
 The cart entry time to live period can be configured in Adobe Experience Manager Web Console:
   * **CCIF Cart Cache Entry time to live** - CIF Cart Cache Entry time to live in milliseconds
-
-
