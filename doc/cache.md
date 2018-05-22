@@ -1,21 +1,8 @@
-# Caches in AEM Connector 
-The AEM CIF Connector implements three different caches:
-* Catalog Cache 
+# Caches in AEM Connector & I/O Runtime
+The AEM CIF Connector implements three different caches: 
 * HTTP cache 
+* Catalog Cache
 * Cart Cache
-
-## Catalog cache
-
-Context: the AEM CIF connector implements a Sling resource provider in order to map categories and products data into synthetic resources. For example, it is possible to configure the connector such that categories and products data is available under `/var/commerce/products/cloudcommerce` with say, for example a Men's category and a product from that category respectively mapped at `/var/commerce/products/cloudcommerce/Men` and `/var/commerce/products/cloudcommerce/Men/product-sku`.
-
-In order to speedup the resolution of these categories and products paths, the connector internally maintains a "catalog cache" that is automatically and periodically populated with all the possible category paths. Note that this cache only applies to the Sling resource provider and to the resolution of synthetic resources like for example everything under `/var/commerce/products/cloudcommerce`.
- 
-The following parameters can be configured in Adobe Experience Manager Web Console for the catalog cache:
-* **Enable/disable catalog caching** - Enables/disables catalog caching in the Sling resource provider
-* **Catalog caching time in minutes** - The caching time (in minutes) of the catalog categories
-structure in the Sling resource provider
-* **Catalog paging limit** - The number of categories that are queried at once by the catalog cache when it automatically (re-)populates the cache. 
-* **Enable/disable cache scheduler** - Enables/disables the periodic update of the cache. This should only be disabled for testing purposes.
 
 ## HTTP Cache
  
@@ -33,6 +20,19 @@ For more details on the `Cache-Control` refer to [Cache-Control](https://www.w3.
 For more details on how to set HTTP headers from Openwhisk actions refer to [Web Actions](https://github.com/apache/incubator-openwhisk/blob/master/docs/webactions.md#web-actions). 
 
 Note that an Openwhisk action has to be deployed as a `webaction` to be able to return valid HTTP responses.   
+
+## Catalog cache
+
+Context: the AEM CIF connector implements a Sling resource provider in order to map categories and products data into synthetic resources. For example, it is possible to configure the connector such that categories and products data is available under `/var/commerce/products/cloudcommerce` with say, for example a Men's category and a product from that category respectively mapped at `/var/commerce/products/cloudcommerce/Men` and `/var/commerce/products/cloudcommerce/Men/product-sku`.
+
+In order to speedup the resolution of these categories and products paths, the connector internally maintains a "catalog cache" that is automatically and periodically populated with all the possible category paths. Note that this cache only applies to the Sling resource provider and to the resolution of synthetic resources like for example everything under `/var/commerce/products/cloudcommerce`.
+ 
+The following parameters can be configured in Adobe Experience Manager Web Console for the catalog cache:
+* **Enable/disable catalog caching** - Enables/disables catalog caching in the Sling resource provider
+* **Catalog caching time in minutes** - The caching time (in minutes) of the catalog categories
+structure in the Sling resource provider
+* **Catalog paging limit** - The number of categories that are queried at once by the catalog cache when it automatically (re-)populates the cache. 
+* **Enable/disable cache scheduler** - Enables/disables the periodic update of the cache. This should only be disabled for testing purposes.
 
 ## Cart Cache
 Cart Cache is a short lived cached. It was designed to avoid unnecessary `/GET` Cart API requests after updating the cart. 
