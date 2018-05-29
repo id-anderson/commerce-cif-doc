@@ -2,7 +2,7 @@
   "swagger" : "2.0",
   "info" : {
     "description" : "Adobe Commerce Cloud API",
-    "version" : "0.1.110",
+    "version" : "0.1.114",
     "title" : "Commerce Cloud Integration Framework API",
     "license" : {
       "name" : "Copyright 2018 Adobe Systems Incorporated. All Rights Reserved."
@@ -18,6 +18,8 @@
     "name" : "categories"
   }, {
     "name" : "customers"
+  }, {
+    "name" : "inventory"
   }, {
     "name" : "orders"
   }, {
@@ -67,13 +69,22 @@
             }
           },
           "400" : {
-            "description" : "Invalid ID supplied."
+            "description" : "Invalid ID supplied.",
+            "schema" : {
+              "$ref" : "#/definitions/ErrorResponse"
+            }
           },
           "403" : {
-            "description" : "Not allowed to create a cart."
+            "description" : "Not allowed to create a cart.",
+            "schema" : {
+              "$ref" : "#/definitions/ErrorResponse"
+            }
           },
           "404" : {
-            "description" : "Cart not found."
+            "description" : "Cart not found.",
+            "schema" : {
+              "$ref" : "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -106,13 +117,22 @@
             }
           },
           "400" : {
-            "description" : "Invalid ID supplied."
+            "description" : "Invalid ID supplied.",
+            "schema" : {
+              "$ref" : "#/definitions/ErrorResponse"
+            }
           },
           "403" : {
-            "description" : "Not allowed to fetch that cart."
+            "description" : "Not allowed to fetch that cart.",
+            "schema" : {
+              "$ref" : "#/definitions/ErrorResponse"
+            }
           },
           "404" : {
-            "description" : "Cart not found."
+            "description" : "Cart not found.",
+            "schema" : {
+              "$ref" : "#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -143,13 +163,22 @@
             }
           },
           "400" : {
-            "description" : "Invalid ID supplied."
+            "description" : "Invalid ID supplied.",
+            "schema" : {
+              "$ref" : "#/definitions/ErrorResponse"
+            }
           },
           "403" : {
-            "description" : "Not allowed to delete that cart."
+            "description" : "Not allowed to delete that cart.",
+            "schema" : {
+              "$ref" : "#/definitions/ErrorResponse"
+            }
           },
           "404" : {
-            "description" : "Cart not found."
+            "description" : "Cart not found.",
+            "schema" : {
+              "$ref" : "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -185,13 +214,22 @@
             }
           },
           "400" : {
-            "description" : "Invalid ID supplied."
+            "description" : "Invalid ID supplied.",
+            "schema" : {
+              "$ref" : "#/definitions/ErrorResponse"
+            }
           },
           "403" : {
-            "description" : "Not allowed to set the billing address"
+            "description" : "Not allowed to set the billing address",
+            "schema" : {
+              "$ref" : "#/definitions/ErrorResponse"
+            }
           },
           "404" : {
-            "description" : "Cart not found."
+            "description" : "Cart not found.",
+            "schema" : {
+              "$ref" : "#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -222,13 +260,22 @@
             }
           },
           "400" : {
-            "description" : "Invalid ID supplied."
+            "description" : "Invalid ID supplied.",
+            "schema" : {
+              "$ref" : "#/definitions/ErrorResponse"
+            }
           },
           "403" : {
-            "description" : "Not allowed to delete the billing address"
+            "description" : "Not allowed to delete the billing address",
+            "schema" : {
+              "$ref" : "#/definitions/ErrorResponse"
+            }
           },
           "404" : {
-            "description" : "Cart not found."
+            "description" : "Cart not found.",
+            "schema" : {
+              "$ref" : "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -268,13 +315,22 @@
             }
           },
           "400" : {
-            "description" : "Bad Request."
+            "description" : "Bad Request.",
+            "schema" : {
+              "$ref" : "#/definitions/ErrorResponse"
+            }
           },
           "403" : {
-            "description" : "Forbidden."
+            "description" : "Forbidden.",
+            "schema" : {
+              "$ref" : "#/definitions/ErrorResponse"
+            }
           },
           "404" : {
-            "description" : "Not Found."
+            "description" : "Not Found.",
+            "schema" : {
+              "$ref" : "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -313,13 +369,22 @@
             }
           },
           "400" : {
-            "description" : "Bad Request."
+            "description" : "Bad Request.",
+            "schema" : {
+              "$ref" : "#/definitions/ErrorResponse"
+            }
           },
           "403" : {
-            "description" : "Forbidden."
+            "description" : "Forbidden.",
+            "schema" : {
+              "$ref" : "#/definitions/ErrorResponse"
+            }
           },
           "404" : {
-            "description" : "Not Found."
+            "description" : "Not Found.",
+            "schema" : {
+              "$ref" : "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -367,13 +432,22 @@
             }
           },
           "400" : {
-            "description" : "Invalid ID supplied."
+            "description" : "Invalid ID supplied.",
+            "schema" : {
+              "$ref" : "#/definitions/ErrorResponse"
+            }
           },
           "403" : {
-            "description" : "Not allowed to add an entry to that cart."
+            "description" : "Not allowed to add an entry to that cart.",
+            "schema" : {
+              "$ref" : "#/definitions/ErrorResponse"
+            }
           },
           "404" : {
-            "description" : "Cart not found."
+            "description" : "Cart not found.",
+            "schema" : {
+              "$ref" : "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -421,13 +495,22 @@
             }
           },
           "400" : {
-            "description" : "Invalid ID supplied."
+            "description" : "Invalid ID supplied.",
+            "schema" : {
+              "$ref" : "#/definitions/ErrorResponse"
+            }
           },
           "403" : {
-            "description" : "Not allowed to update that cart entry."
+            "description" : "Not allowed to update that cart entry.",
+            "schema" : {
+              "$ref" : "#/definitions/ErrorResponse"
+            }
           },
           "404" : {
-            "description" : "Resource not found."
+            "description" : "Resource not found.",
+            "schema" : {
+              "$ref" : "#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -464,13 +547,22 @@
             }
           },
           "400" : {
-            "description" : "Invalid ID supplied."
+            "description" : "Invalid ID supplied.",
+            "schema" : {
+              "$ref" : "#/definitions/ErrorResponse"
+            }
           },
           "403" : {
-            "description" : "Not allowed to delete that cart entry."
+            "description" : "Not allowed to delete that cart entry.",
+            "schema" : {
+              "$ref" : "#/definitions/ErrorResponse"
+            }
           },
           "404" : {
-            "description" : "Resource not found - cart or entry."
+            "description" : "Resource not found - cart or entry.",
+            "schema" : {
+              "$ref" : "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -506,13 +598,22 @@
             }
           },
           "400" : {
-            "description" : "Invalid ID supplied."
+            "description" : "Invalid ID supplied.",
+            "schema" : {
+              "$ref" : "#/definitions/ErrorResponse"
+            }
           },
           "403" : {
-            "description" : "Not allowed to set the payment."
+            "description" : "Not allowed to set the payment.",
+            "schema" : {
+              "$ref" : "#/definitions/ErrorResponse"
+            }
           },
           "404" : {
-            "description" : "Cart not found."
+            "description" : "Cart not found.",
+            "schema" : {
+              "$ref" : "#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -543,13 +644,22 @@
             }
           },
           "400" : {
-            "description" : "Invalid ID supplied."
+            "description" : "Invalid ID supplied.",
+            "schema" : {
+              "$ref" : "#/definitions/ErrorResponse"
+            }
           },
           "403" : {
-            "description" : "Not allowed to update the payment."
+            "description" : "Not allowed to update the payment.",
+            "schema" : {
+              "$ref" : "#/definitions/ErrorResponse"
+            }
           },
           "404" : {
-            "description" : "Cart not found."
+            "description" : "Cart not found.",
+            "schema" : {
+              "$ref" : "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -585,13 +695,22 @@
             }
           },
           "400" : {
-            "description" : "Invalid ID supplied."
+            "description" : "Invalid ID supplied.",
+            "schema" : {
+              "$ref" : "#/definitions/ErrorResponse"
+            }
           },
           "403" : {
-            "description" : "Not allowed to set the shipping address"
+            "description" : "Not allowed to set the shipping address",
+            "schema" : {
+              "$ref" : "#/definitions/ErrorResponse"
+            }
           },
           "404" : {
-            "description" : "Cart not found."
+            "description" : "Cart not found.",
+            "schema" : {
+              "$ref" : "#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -622,13 +741,22 @@
             }
           },
           "400" : {
-            "description" : "Invalid ID supplied."
+            "description" : "Invalid ID supplied.",
+            "schema" : {
+              "$ref" : "#/definitions/ErrorResponse"
+            }
           },
           "403" : {
-            "description" : "Not allowed to delete the shipping address"
+            "description" : "Not allowed to delete the shipping address",
+            "schema" : {
+              "$ref" : "#/definitions/ErrorResponse"
+            }
           },
           "404" : {
-            "description" : "Cart not found."
+            "description" : "Cart not found.",
+            "schema" : {
+              "$ref" : "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -668,13 +796,22 @@
             }
           },
           "400" : {
-            "description" : "Invalid ID supplied."
+            "description" : "Invalid ID supplied.",
+            "schema" : {
+              "$ref" : "#/definitions/ErrorResponse"
+            }
           },
           "403" : {
-            "description" : "Not allowed to set the shipping method."
+            "description" : "Not allowed to set the shipping method.",
+            "schema" : {
+              "$ref" : "#/definitions/ErrorResponse"
+            }
           },
           "404" : {
-            "description" : "Cart not found."
+            "description" : "Cart not found.",
+            "schema" : {
+              "$ref" : "#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -705,13 +842,22 @@
             }
           },
           "400" : {
-            "description" : "Invalid ID supplied."
+            "description" : "Invalid ID supplied.",
+            "schema" : {
+              "$ref" : "#/definitions/ErrorResponse"
+            }
           },
           "403" : {
-            "description" : "Not allowed to delete the shipping method."
+            "description" : "Not allowed to delete the shipping method.",
+            "schema" : {
+              "$ref" : "#/definitions/ErrorResponse"
+            }
           },
           "404" : {
-            "description" : "Cart not found."
+            "description" : "Cart not found.",
+            "schema" : {
+              "$ref" : "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -738,7 +884,7 @@
         } ],
         "responses" : {
           "200" : {
-            "description" : "Successful operation",
+            "description" : "successful operation",
             "schema" : {
               "type" : "array",
               "items" : {
@@ -747,10 +893,16 @@
             }
           },
           "400" : {
-            "description" : "Invalid ID supplied."
+            "description" : "Invalid ID supplied.",
+            "schema" : {
+              "$ref" : "#/definitions/ErrorResponse"
+            }
           },
           "404" : {
-            "description" : "Cart not found."
+            "description" : "Cart not found.",
+            "schema" : {
+              "$ref" : "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -837,10 +989,16 @@
             }
           },
           "400" : {
-            "description" : "Invalid ID supplied"
+            "description" : "Invalid ID supplied",
+            "schema" : {
+              "$ref" : "#/definitions/ErrorResponse"
+            }
           },
           "404" : {
-            "description" : "Category not found"
+            "description" : "Category not found",
+            "schema" : {
+              "$ref" : "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -880,7 +1038,10 @@
             }
           },
           "400" : {
-            "description" : "Invalid customer credentials"
+            "description" : "Invalid customer credentials",
+            "schema" : {
+              "$ref" : "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -907,10 +1068,76 @@
             }
           },
           "400" : {
-            "description" : "Invalid ID supplied"
+            "description" : "Invalid ID supplied",
+            "schema" : {
+              "$ref" : "#/definitions/ErrorResponse"
+            }
           },
           "404" : {
-            "description" : "Customer not found"
+            "description" : "Customer not found",
+            "schema" : {
+              "$ref" : "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/inventory/query" : {
+      "get" : {
+        "tags" : [ "inventory" ],
+        "summary" : "Queries inventory based on the given query parameters.",
+        "description" : "",
+        "operationId" : "query",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "productId",
+          "in" : "query",
+          "description" : "The list of product identifiers for which the inventory will be queried.",
+          "required" : false,
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          },
+          "collectionFormat" : "pipes"
+        }, {
+          "name" : "scope",
+          "in" : "query",
+          "description" : "The list of scopes for which the inventory will be queried.",
+          "required" : false,
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          },
+          "collectionFormat" : "pipes"
+        }, {
+          "name" : "offset",
+          "in" : "query",
+          "description" : "Defines the number of inventory items to skip when returning the result.",
+          "required" : false,
+          "type" : "integer",
+          "minimum" : 0,
+          "format" : "int32"
+        }, {
+          "name" : "limit",
+          "in" : "query",
+          "description" : "Defines the maximum number of inventory items to be returned in the result.",
+          "required" : false,
+          "type" : "integer",
+          "minimum" : 0,
+          "format" : "int32"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/PagedResponseInventoryItem"
+            }
+          },
+          "400" : {
+            "description" : "Invalid query parameters supplied",
+            "schema" : {
+              "$ref" : "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -944,13 +1171,22 @@
             }
           },
           "400" : {
-            "description" : "Invalid ID supplied."
+            "description" : "Invalid ID supplied.",
+            "schema" : {
+              "$ref" : "#/definitions/ErrorResponse"
+            }
           },
           "403" : {
-            "description" : "Not allowed to create the order."
+            "description" : "Not allowed to create the order.",
+            "schema" : {
+              "$ref" : "#/definitions/ErrorResponse"
+            }
           },
           "404" : {
-            "description" : "Cart not found."
+            "description" : "Cart not found.",
+            "schema" : {
+              "$ref" : "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -1033,7 +1269,10 @@
             }
           },
           "400" : {
-            "description" : "Invalid search parameters supplied"
+            "description" : "Invalid search parameters supplied",
+            "schema" : {
+              "$ref" : "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -1060,10 +1299,16 @@
             }
           },
           "400" : {
-            "description" : "Invalid ID supplied"
+            "description" : "Invalid ID supplied",
+            "schema" : {
+              "$ref" : "#/definitions/ErrorResponse"
+            }
           },
           "404" : {
-            "description" : "Product not found"
+            "description" : "Product not found",
+            "schema" : {
+              "$ref" : "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -1471,6 +1716,29 @@
         }
       }
     },
+    "ErrorResponse" : {
+      "type" : "object",
+      "properties" : {
+        "type" : {
+          "type" : "string",
+          "example" : "coupon",
+          "description" : "The error type."
+        },
+        "reason" : {
+          "type" : "string",
+          "example" : "coupon-expired",
+          "description" : "The error reason."
+        },
+        "message" : {
+          "type" : "object",
+          "example" : "{\n        \"en\": \"Coupon expired.\",\n        \"de\": \"Gutschein abgelaufen.\"\n    }",
+          "description" : "Localized message",
+          "additionalProperties" : {
+            "type" : "string"
+          }
+        }
+      }
+    },
     "Facet" : {
       "type" : "object",
       "required" : [ "name" ],
@@ -1528,6 +1796,39 @@
         "selected" : {
           "type" : "boolean",
           "description" : "Indicates if the current facet value was selected."
+        }
+      }
+    },
+    "InventoryItem" : {
+      "type" : "object",
+      "required" : [ "inventoryId" ],
+      "properties" : {
+        "inventoryId" : {
+          "type" : "string",
+          "description" : "The inventory identifier."
+        },
+        "productId" : {
+          "type" : "string",
+          "description" : "The product identifier."
+        },
+        "scope" : {
+          "type" : "string",
+          "description" : "The scope for the inventory (i.e store or channel)."
+        },
+        "availableQuantity" : {
+          "type" : "integer",
+          "format" : "int32",
+          "description" : "The product available quantity for this inventory."
+        },
+        "restockDaysPeriod" : {
+          "type" : "integer",
+          "format" : "int32",
+          "description" : "The period in days when this inventory is restocked."
+        },
+        "expectedDeliveryDate" : {
+          "type" : "string",
+          "format" : "date-time",
+          "description" : "The next expected delivery date for this inventory."
         }
       }
     },
@@ -1610,6 +1911,40 @@
           "description" : "The results for this response.",
           "items" : {
             "$ref" : "#/definitions/Category"
+          }
+        },
+        "facets" : {
+          "type" : "array",
+          "description" : "The list of facets for this response.",
+          "items" : {
+            "$ref" : "#/definitions/Facet"
+          }
+        }
+      }
+    },
+    "PagedResponseInventoryItem" : {
+      "type" : "object",
+      "properties" : {
+        "offset" : {
+          "type" : "integer",
+          "format" : "int32",
+          "description" : "The offset for this response, this is the number of elements skipped, not a page number."
+        },
+        "count" : {
+          "type" : "integer",
+          "format" : "int32",
+          "description" : "The actual number of results returned in results."
+        },
+        "total" : {
+          "type" : "integer",
+          "format" : "int32",
+          "description" : "The total number of results matching the query."
+        },
+        "results" : {
+          "type" : "array",
+          "description" : "The results for this response.",
+          "items" : {
+            "$ref" : "#/definitions/InventoryItem"
           }
         },
         "facets" : {
@@ -1862,6 +2197,10 @@
         "sku" : {
           "type" : "string",
           "description" : "The unique SKU of the product assigned by the vendor or manufacturer."
+        },
+        "available" : {
+          "type" : "boolean",
+          "description" : "Indicates if the product is available or not in the inventory."
         }
       }
     },
