@@ -2,7 +2,7 @@
 swagger: "2.0"
 info:
   description: "Adobe Commerce Cloud API"
-  version: "0.1.114"
+  version: "0.1.116"
   title: "Commerce Cloud Integration Framework API"
   license:
     name: "Copyright 2018 Adobe Systems Incorporated. All Rights Reserved."
@@ -17,6 +17,7 @@ tags:
 - name: "inventory"
 - name: "orders"
 - name: "products"
+- name: "shoppinglists"
 schemes:
 - "https"
 paths:
@@ -1083,6 +1084,427 @@ paths:
           description: "Product not found"
           schema:
             $ref: "#/definitions/ErrorResponse"
+  /shoppinglists:
+    get:
+      tags:
+      - "shoppinglists"
+      summary: "Gets a users shopping lists."
+      description: "The entries property is empty for all shopping lists in the response.\
+        \ To retrieve entries, query a single shopping list."
+      operationId: "getShoppingLists"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "offset"
+        in: "query"
+        description: "Defines the number of shopping lists to skip."
+        required: false
+        type: "integer"
+        minimum: 0
+        format: "int32"
+      - name: "limit"
+        in: "query"
+        description: "Defines the maximum number of shopping lists to be returned."
+        required: false
+        type: "integer"
+        minimum: 0
+        format: "int32"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/PagedResponseShoppingList"
+        400:
+          description: "Bad Request."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        403:
+          description: "Forbidden."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        404:
+          description: "Not Found."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    post:
+      tags:
+      - "shoppinglists"
+      summary: "Creates a new shopping list for the current user."
+      description: "The name and description properties will be stored as localized\
+        \ strings in the language defined by the Content-Language header."
+      operationId: "postShoppingList"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "name"
+        in: "formData"
+        description: "Name of the shopping list."
+        required: true
+        type: "string"
+      - name: "description"
+        in: "formData"
+        description: "Description of the shopping list."
+        required: false
+        type: "string"
+      - name: "Content-Language"
+        in: "header"
+        description: "Language of the shopping list."
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ShoppingList"
+        201:
+          description: "Created."
+          schema:
+            $ref: "#/definitions/ShoppingList"
+          headers:
+            Location:
+              type: "string"
+              description: "Location of the newly created shopping list."
+        400:
+          description: "Bad Request."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        403:
+          description: "Forbidden."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        404:
+          description: "Not Found."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /shoppinglists/{id}:
+    get:
+      tags:
+      - "shoppinglists"
+      summary: "Gets a users shopping list with a given id."
+      description: ""
+      operationId: "getShoppingList"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The id of the shopping list to return."
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ShoppingList"
+        400:
+          description: "Bad Request."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        403:
+          description: "Forbidden."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        404:
+          description: "Not Found."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    put:
+      tags:
+      - "shoppinglists"
+      summary: "Replaces a shopping list with the given one."
+      description: ""
+      operationId: "putShoppingList"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The id of the shopping list to replace."
+        required: true
+        type: "string"
+      - name: "name"
+        in: "formData"
+        description: "Name of the shopping list."
+        required: true
+        type: "string"
+      - name: "description"
+        in: "formData"
+        description: "Description of the shopping list."
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ShoppingList"
+        400:
+          description: "Bad Request."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        403:
+          description: "Forbidden."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        404:
+          description: "Not Found."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    delete:
+      tags:
+      - "shoppinglists"
+      summary: "Deletes a shopping list."
+      description: ""
+      operationId: "deleteShoppingList"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The id of the shopping list to be deleted."
+        required: true
+        type: "string"
+      responses:
+        204:
+          description: "No Content."
+        400:
+          description: "Bad Request."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        403:
+          description: "Forbidden."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        404:
+          description: "Not Found."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /shoppinglists/{id}/entries:
+    get:
+      tags:
+      - "shoppinglists"
+      summary: "Gets all entries from a shopping list."
+      description: ""
+      operationId: "getShoppingListEntries"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The id of the shopping list to return entries from."
+        required: true
+        type: "string"
+      - name: "offset"
+        in: "query"
+        description: "Defines the number of entries to skip."
+        required: false
+        type: "integer"
+        minimum: 0
+        format: "int32"
+      - name: "limit"
+        in: "query"
+        description: "Defines the maximum number of entries to be returned."
+        required: false
+        type: "integer"
+        minimum: 0
+        format: "int32"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/PagedResponseShoppingListEntry"
+        400:
+          description: "Bad Request."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        403:
+          description: "Forbidden."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        404:
+          description: "Not Found."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    post:
+      tags:
+      - "shoppinglists"
+      summary: "Creates a new entry for a shopping list."
+      description: ""
+      operationId: "postShoppingListEntry"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The id of the shopping list."
+        required: true
+        type: "string"
+      - name: "quantity"
+        in: "formData"
+        description: "The quantity for the new entry."
+        required: true
+        type: "integer"
+        minimum: 0
+        format: "int32"
+      - name: "productVariantId"
+        in: "formData"
+        description: "The product variant id to be added to the entry. If the product\
+          \ variant exists in the shopping list, its quantity is increased with the\
+          \ provided quantity."
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ShoppingListEntry"
+        201:
+          description: "Created."
+          schema:
+            $ref: "#/definitions/ShoppingList"
+          headers:
+            Location:
+              type: "string"
+              description: "Location of the newly created entry."
+        400:
+          description: "Bad Request."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        403:
+          description: "Forbidden."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        404:
+          description: "Not Found."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /shoppinglists/{id}/entries/{entryId}:
+    get:
+      tags:
+      - "shoppinglists"
+      summary: "Gets a single entry from a shopping list."
+      description: ""
+      operationId: "getShoppingListEntry"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The id of the shopping list."
+        required: true
+        type: "string"
+      - name: "entryId"
+        in: "path"
+        description: "The id of the shopping list entry to return."
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ShoppingListEntry"
+        400:
+          description: "Bad Request."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        403:
+          description: "Forbidden."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        404:
+          description: "Not Found."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    put:
+      tags:
+      - "shoppinglists"
+      summary: "Replaces an entry with the given one."
+      description: ""
+      operationId: "putShoppingListEntry"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The id of the shopping list."
+        required: true
+        type: "string"
+      - name: "entryId"
+        in: "path"
+        description: "The id of the entry to replace."
+        required: true
+        type: "string"
+      - name: "quantity"
+        in: "formData"
+        description: "The quantity for the new entry."
+        required: true
+        type: "integer"
+        minimum: 0
+        format: "int32"
+      - name: "productVariantId"
+        in: "formData"
+        description: "The product variant id to be added to the entry. If the product\
+          \ variant exists in another entry in the shopping list, this request fails."
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ShoppingListEntry"
+        400:
+          description: "Bad Request."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        403:
+          description: "Forbidden."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        404:
+          description: "Not Found."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    delete:
+      tags:
+      - "shoppinglists"
+      summary: "Deletes an entry from a shopping list."
+      description: ""
+      operationId: "deleteShoppingListEntry"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The id of the shopping list."
+        required: true
+        type: "string"
+      - name: "entryId"
+        in: "path"
+        description: "The id of the entry."
+        required: true
+        type: "string"
+      responses:
+        204:
+          description: "No Content."
+        400:
+          description: "Bad Request."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        403:
+          description: "Forbidden."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        404:
+          description: "Not Found."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
 definitions:
   Address:
     type: "object"
@@ -1625,6 +2047,58 @@ definitions:
         description: "The list of facets for this response."
         items:
           $ref: "#/definitions/Facet"
+  PagedResponseShoppingList:
+    type: "object"
+    properties:
+      offset:
+        type: "integer"
+        format: "int32"
+        description: "The offset for this response, this is the number of elements\
+          \ skipped, not a page number."
+      count:
+        type: "integer"
+        format: "int32"
+        description: "The actual number of results returned in results."
+      total:
+        type: "integer"
+        format: "int32"
+        description: "The total number of results matching the query."
+      results:
+        type: "array"
+        description: "The results for this response."
+        items:
+          $ref: "#/definitions/ShoppingList"
+      facets:
+        type: "array"
+        description: "The list of facets for this response."
+        items:
+          $ref: "#/definitions/Facet"
+  PagedResponseShoppingListEntry:
+    type: "object"
+    properties:
+      offset:
+        type: "integer"
+        format: "int32"
+        description: "The offset for this response, this is the number of elements\
+          \ skipped, not a page number."
+      count:
+        type: "integer"
+        format: "int32"
+        description: "The actual number of results returned in results."
+      total:
+        type: "integer"
+        format: "int32"
+        description: "The total number of results matching the query."
+      results:
+        type: "array"
+        description: "The results for this response."
+        items:
+          $ref: "#/definitions/ShoppingListEntry"
+      facets:
+        type: "array"
+        description: "The list of facets for this response."
+        items:
+          $ref: "#/definitions/Facet"
   Payment:
     type: "object"
     required:
@@ -1829,6 +2303,69 @@ definitions:
       price:
         description: "The price of the shipping method aka shipping cost."
         $ref: "#/definitions/Price"
+  ShoppingList:
+    type: "object"
+    required:
+    - "entries"
+    - "id"
+    - "name"
+    properties:
+      id:
+        type: "string"
+        description: "The id of the shopping list."
+      name:
+        type: "object"
+        description: "The name of the shopping list. Localization is optional here,\
+          \ the default language is en."
+        additionalProperties:
+          type: "string"
+      description:
+        type: "object"
+        description: "The description of the shopping list. Localization is optional\
+          \ here, the default language is en."
+        additionalProperties:
+          type: "string"
+      entries:
+        type: "array"
+        description: "The entries of the shopping list."
+        items:
+          $ref: "#/definitions/ShoppingListEntry"
+      customerId:
+        type: "string"
+        description: "The customer id that owns this shopping list."
+      createdDate:
+        type: "string"
+        format: "date-time"
+        description: "The date when this shopping list was created."
+      lastModifiedDate:
+        type: "string"
+        format: "date-time"
+        description: "The date when this shopping list was last modified."
+  ShoppingListEntry:
+    type: "object"
+    required:
+    - "id"
+    - "productVariant"
+    - "quantity"
+    properties:
+      id:
+        type: "string"
+        description: "The id of the entry."
+      productVariant:
+        description: "The product variant for the entry."
+        $ref: "#/definitions/ProductVariant"
+      quantity:
+        type: "integer"
+        format: "int32"
+        description: "The quantity for the entry."
+      createdDate:
+        type: "string"
+        format: "date-time"
+        description: "The date when this entry was created."
+      lastModifiedDate:
+        type: "string"
+        format: "date-time"
+        description: "The date when this entry was last modified."
   TaxInfo:
     type: "object"
     required:
