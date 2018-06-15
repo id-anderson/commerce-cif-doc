@@ -2,7 +2,7 @@
 swagger: "2.0"
 info:
   description: "Adobe Commerce Cloud API"
-  version: "0.1.116"
+  version: "0.1.118"
   title: "Commerce Cloud Integration Framework API"
   license:
     name: "Copyright 2018 Adobe Systems Incorporated. All Rights Reserved."
@@ -2166,6 +2166,9 @@ definitions:
         type: "string"
         description: "The internal unique ID of the product in the commerce backend\
           \ system."
+      sku:
+        type: "string"
+        description: "The unique SKU of the product assigned by the vendor or manufacturer."
       name:
         type: "object"
         description: "The localized name of the product."
@@ -2221,6 +2224,9 @@ definitions:
         type: "string"
         description: "The internal unique ID of the product in the commerce backend\
           \ system."
+      sku:
+        type: "string"
+        description: "The unique SKU of the product assigned by the vendor or manufacturer."
       name:
         type: "object"
         description: "The localized name of the product."
@@ -2259,9 +2265,6 @@ definitions:
         type: "string"
         format: "date-time"
         description: "The date when this product was last modified."
-      sku:
-        type: "string"
-        description: "The unique SKU of the product assigned by the vendor or manufacturer."
       available:
         type: "boolean"
         description: "Indicates if the product is available or not in the inventory."

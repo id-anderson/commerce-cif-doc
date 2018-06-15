@@ -4,10 +4,12 @@
     "total": 2,
     "results": [
         {
-            "id": "product-1"
+            "id": "product-1",
+            "sku": "sku-1"
         },
         {
-            "id": "product-2"
+            "id": "product-2",
+            "sku": "sku-2"
         }
     ],
     "facets": []

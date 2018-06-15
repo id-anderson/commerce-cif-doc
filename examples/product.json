@@ -1,5 +1,6 @@
 {
     "id": "product-1",
+    "sku": "sku-1",
     "name": {
         "de": "A localized DE name",
         "en": "A localized EN name"
@@ -112,7 +113,8 @@
                     "value": "2018-04-17T17:26:29.432Z",
                     "variantAttribute": false
                 }
-            ]
+            ],
+            "available": "true"
         },
         {
             "id": "product-1-2",
@@ -181,7 +183,8 @@
                     "value": "2018-04-17T17:26:29.432Z",
                     "variantAttribute": false
                 }
-            ]
+            ],
+            "available": "false"
         }
     ]
 }
